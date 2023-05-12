@@ -1,0 +1,81 @@
+START TRANSACTION;
+
+insert into employees values (1231,'www','sss','x334','www@gmail.com',3,'1234','Sales Rep');
+
+insert into employees values (1232,'ucok','baba','x335','ucok@gmail.com',3,'1234','Sales Rep');
+
+insert into employees values (1233,'asep','urasep','x336','asep@gmail.com',3,'1234','Sales Rep');
+
+insert into employees values (1235,'wawan','surawan','x337','wawan@gmail.com',3,'1234','Sales Rep');
+
+insert into employees values (1236,'eko','sureko','x337','eko@gmail.com',3,'1234','Sales Rep');
+
+commit;
+
+--
+
+MariaDB [classicmodels]> select * from pesan;
++----------+-----------+-----------+------------+
+| order_id | prod_name | order_num | order_date |
++----------+-----------+-----------+------------+
+|        1 | laptop    |      1243 | 2023-05-10 |
+|        2 | mouse     |      1242 | 2023-05-10 |
+|        3 | desktop   |      1241 | 2023-05-10 |
+|        4 | mobile    |      1244 | 2023-05-10 |
+|        5 | antivirus |      1234 | 2023-05-10 |
+|        6 | printer   |      3214 | 2023-05-10 |
++----------+-----------+-----------+------------+
+6 rows in set (0.001 sec)
+
+START TRANSACTION;
+DELETE FROM pesan;
+select * from pesan;
+Empty set (0.000 sec)
+
+rollback;
+select * from pesan;
++----------+-----------+-----------+------------+
+| order_id | prod_name | order_num | order_date |
++----------+-----------+-----------+------------+
+|        1 | laptop    |      1243 | 2023-05-10 |
+|        2 | mouse     |      1242 | 2023-05-10 |
+|        3 | desktop   |      1241 | 2023-05-10 |
+|        4 | mobile    |      1244 | 2023-05-10 |
+|        5 | antivirus |      1234 | 2023-05-10 |
+|        6 | printer   |      3214 | 2023-05-10 |
++----------+-----------+-----------+------------+
+
+----
+
+select * from pesan;
++----------+-----------+-----------+------------+
+| order_id | prod_name | order_num | order_date |
++----------+-----------+-----------+------------+
+|        1 | laptop    |      1243 | 2023-05-10 |
+|        2 | mouse     |      1242 | 2023-05-10 |
+|        3 | desktop   |      1241 | 2023-05-10 |
+|        4 | mobile    |      1244 | 2023-05-10 |
+|        5 | antivirus |      1234 | 2023-05-10 |
+|        6 | printer   |      3214 | 2023-05-10 |
++----------+-----------+-----------+------------+
+
+insert into pesan values (7,'keyboard',337,'2023-05-10');
+
+SAVEPOINT terakhir_kuubah;
+
+insert into pesan values (8,'handuk',983,'2023-05-10');
+
+ROLLBACK TO SAVEPOINT terakhir_kuubah;
+
+select * from pesan;
++----------+-----------+-----------+------------+
+| order_id | prod_name | order_num | order_date |
++----------+-----------+-----------+------------+
+|        1 | laptop    |      1243 | 2023-05-10 |
+|        2 | mouse     |      1242 | 2023-05-10 |
+|        3 | desktop   |      1241 | 2023-05-10 |
+|        4 | mobile    |      1244 | 2023-05-10 |
+|        5 | antivirus |      1234 | 2023-05-10 |
+|        6 | printer   |      3214 | 2023-05-10 |
+|        7 | keyboard  |       337 | 2023-05-10 |
++----------+-----------+-----------+------------+

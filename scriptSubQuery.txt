@@ -1,0 +1,8 @@
+1. select * from payments where customerNumber in (select customerNumber from payments where amount > 100000);
+2. insert into pesan select * from customers where customerNumber in (select customerNumber from customers);
+3. update customers set creditLimit = creditLimit * 0.11 where country in (select country from offices);
+4. delete from pesan where order_id in (select orderNumber from orders);
+5. select * from customers where creditLimit = (select MAX(creditLimit) from customers);
+6. select managers.employeeNumber,employees.jobTitle from (select employeeNumber from employees where reportsTo is NULL) as managers join employees on managers.employeeNumber = employees.employeeNumber;
+7. select firstName,lastName from employees union select contactfirstName,contactlastName from customers;
+8. select firstName,lastName from employees intersect select contactfirstName,contactlastName from customers;
